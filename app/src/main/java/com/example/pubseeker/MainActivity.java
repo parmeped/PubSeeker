@@ -33,12 +33,8 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
-
-
-
-
-
     }
+
     public void addDotsIndicator(int position){
         mDots = new TextView[3];
         mDotLayout.removeAllViews();
