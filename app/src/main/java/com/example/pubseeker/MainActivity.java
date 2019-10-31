@@ -8,6 +8,9 @@ import android.text.Html;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
+        dataWriter();
     }
 
     public void addDotsIndicator(int position){
@@ -52,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
             mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
         }
 
+    }
+
+    private void dataWriter() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
