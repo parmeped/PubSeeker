@@ -5,13 +5,21 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
+
+import java.io.Console;
+import java.net.ConnectException;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager mslideViewPager;
@@ -20,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView[] mDots;
 
     private SliderAdapter sliderAdapter;
+    private static final String TAG = "MainActivity";
 
 
     @Override
@@ -37,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         mslideViewPager.addOnPageChangeListener(viewListener);
         dataWriter();
+        dataReader();
     }
 
     public void addDotsIndicator(int position){
@@ -59,10 +69,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void dataWriter() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        FirebaseDatabase database =  FirebaseDatabase.getInstance();
+        String userId = "16";
+        User user = new User(userId, "Another User", "another@userDomain.com");
+        DatabaseReference mRef = database.getReference().child("Users").child(userId);
+        mRef.setValue(user);
+    }
 
-        myRef.setValue("Hello, World!");
+    private void dataReader() {
+        // Read from the database
+        FirebaseDatabase database =  FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+        DatabaseReference userValues = myRef.child("Users");
+        userValues.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                    User user = singleSnapshot.getValue(User.class);
+                    user.setKey(singleSnapshot.getKey().toString());
+                    Log.d(TAG, "Value is: " + user.showUserDataAsJson());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
