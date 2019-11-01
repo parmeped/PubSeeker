@@ -1,9 +1,9 @@
 package com.example.pubseeker;
 
 public class User {
-    public String name;
-    public String email;
-    public String key;
+    private String name;
+    private String email;
+    private String key;
 
     public  User() {
 
@@ -19,8 +19,13 @@ public class User {
         this.key = key;
     }
 
-    public String showUserDataAsJson() {
-        return "name: " + this.name + "," +
+    public String getKey() {
+        return this.key;
+    }
+
+    public String showUserDataAsJSON() {
+        return  "{" +
+                "name: " + this.name + "," +
                 "email: " + this.email + "," +
                 "key: " + this.key +
                 "}";

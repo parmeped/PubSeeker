@@ -13,11 +13,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 import java.io.Console;
+import java.lang.reflect.GenericDeclaration;
 import java.net.ConnectException;
 import java.util.logging.Logger;
 
@@ -45,8 +47,25 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
+        User user = new User("17", "TestingGenerics", "Testing@generics.com");
+        DatabaseContext.dataWriter("Users", user, user.getKey());
+
+        User user2 = new User("19", "TestingGenerics2", "Testing@generics.com");
+        DatabaseContext.dataWriter("Users", user2, user2.getKey());
+
+        AnotherClassTesting testing = new AnotherClassTesting("5", "This is a string", "13");
+        DatabaseContext.dataWriter("NewCollection", testing, testing.getKey()); // esto registra una nueva collection en la db.
         dataWriter();
         dataReader();
+    }
+
+    // Esto estaba funcionando antes pero ahora no...
+    private void dataWriter() {
+        FirebaseDatabase database =  FirebaseDatabase.getInstance();
+        String userId = "20";
+        User user = new User(userId, "WhatsGoingOn", "another@userDomain.com");
+        DatabaseReference mRef = database.getReference().child("Users").child(userId);
+        mRef.setValue(user);
     }
 
     public void addDotsIndicator(int position){
@@ -68,26 +87,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void dataWriter() {
-        FirebaseDatabase database =  FirebaseDatabase.getInstance();
-        String userId = "16";
-        User user = new User(userId, "Another User", "another@userDomain.com");
-        DatabaseReference mRef = database.getReference().child("Users").child(userId);
-        mRef.setValue(user);
-    }
-
     private void dataReader() {
         // Read from the database
         FirebaseDatabase database =  FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
-        DatabaseReference userValues = myRef.child("Users");
+        DatabaseReference userValues = myRef.child("NewCollection");
         userValues.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    User user = singleSnapshot.getValue(User.class);
-                    user.setKey(singleSnapshot.getKey().toString());
-                    Log.d(TAG, "Value is: " + user.showUserDataAsJson());
+                    AnotherClassTesting anotherTesting = singleSnapshot.getValue(AnotherClassTesting.class);
+                    anotherTesting.setKey(singleSnapshot.getKey().toString());
+                    Log.d(TAG, "Value is: " + anotherTesting.showDataAsJSON());
                 }
             }
 
