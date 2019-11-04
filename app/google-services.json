@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "598168735266",
+    "firebase_url": "https://pubseeker-856a9.firebaseio.com",
+    "project_id": "pubseeker-856a9",
+    "storage_bucket": "pubseeker-856a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598168735266:android:6725cfa70891272638847b",
+        "android_client_info": {
+          "package_name": "com.example.pubseeker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598168735266-kmttlpqp0ennhv44c624e45f8u3rv5jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhK1LnZZ8RTSmxZW78S7TFPios1Hjuvbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598168735266-kmttlpqp0ennhv44c624e45f8u3rv5jo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
