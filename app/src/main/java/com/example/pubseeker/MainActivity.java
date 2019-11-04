@@ -47,25 +47,19 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
-        User user = new User("17", "TestingGenerics", "Testing@generics.com");
-        DatabaseContext.dataWriter("Users", user, user.getKey());
 
-        User user2 = new User("19", "TestingGenerics2", "Testing@generics.com");
-        DatabaseContext.dataWriter("Users", user2, user2.getKey());
+        //firebase Testing
+        DatabaseContext context = new DatabaseContext("MainActivity");
+        User user = new User("8", "Sarasasa", "Testing@generics.com");
+        context.dataWriter("Users", user, user.getKey());
 
-        AnotherClassTesting testing = new AnotherClassTesting("5", "This is a string", "13");
-        DatabaseContext.dataWriter("NewCollection", testing, testing.getKey()); // esto registra una nueva collection en la db.
-        dataWriter();
+        User user1 = new User("7", "SarasaGenerics", "Testing@generics.com");
+        context.dataWriter("Users", user1, user1.getKey());
+
+
+        //AnotherClassTesting testing = new AnotherClassTesting("5", "This is a string", "13");
+        //DatabaseContext.dataWriter("AnotherCollection", testing, testing.getKey()); // esto registra una nueva collection en la db.
         dataReader();
-    }
-
-    // Esto estaba funcionando antes pero ahora no...
-    private void dataWriter() {
-        FirebaseDatabase database =  FirebaseDatabase.getInstance();
-        String userId = "20";
-        User user = new User(userId, "WhatsGoingOn", "another@userDomain.com");
-        DatabaseReference mRef = database.getReference().child("Users").child(userId);
-        mRef.setValue(user);
     }
 
     public void addDotsIndicator(int position){

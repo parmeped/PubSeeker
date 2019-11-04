@@ -13,26 +13,28 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DatabaseContext {
 
-    private static final String TAG = "MainActivity";
+    private String _tag;
+    private static FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-    public static <T> void dataWriter(String collection,T type, String typeId) {
-        FirebaseDatabase database =  FirebaseDatabase.getInstance();
-        DatabaseReference mRef = database.getReference().child(collection).child(typeId);
-        Object obj = type;
-        mRef.setValue(obj);
+    public DatabaseContext(String tag) {
+        this._tag = tag;
     }
 
+    public <T> void dataWriter(String collection,T type, String typeId) {
+        DatabaseReference mRef = db.getReference().child(collection).child(typeId);
+        mRef.setValue(type);
+    }
+
+
     /* Este venia funcionando
-    private void dataWriter() {
+    public static void dataWriter(String collection, User user, String userId) {
         FirebaseDatabase database =  FirebaseDatabase.getInstance();
-        String userId = "16";
-        User user = new User(userId, "Another User", "another@userDomain.com");
-        DatabaseReference mRef = database.getReference().child("Users").child(userId);
+        DatabaseReference mRef = database.getReference().child(collection).child(userId);
         mRef.setValue(user);
     }
     */
 
-    public static void dataReader() {
+    public void dataReader() {
         // Read from the database
         FirebaseDatabase database =  FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -43,14 +45,14 @@ public class DatabaseContext {
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     User user = singleSnapshot.getValue(User.class);
                     user.setKey(singleSnapshot.getKey().toString());
-                    Log.d(TAG, "Value is: " + user.showUserDataAsJSON());
+                    Log.d(_tag, "Value is: " + user.showUserDataAsJSON());
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                Log.w(_tag, "Failed to read value.", error.toException());
             }
         });
     }
