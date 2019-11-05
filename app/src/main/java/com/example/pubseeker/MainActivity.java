@@ -45,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
-        dataWriter();
+        User user = new User("15","pepeeeeeee","Eai");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseContext context = new DatabaseContext(database, "MainActivity");
+        context.dataWriter(user, "Users");
+
         dataReader();
     }
 
