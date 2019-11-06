@@ -1,9 +1,14 @@
 package com.example.pubseeker;
 
-public class User {
-    public String name;
-    public String email;
-    public String key;
+import com.example.pubseeker.Common.IDatabaseEntity;
+
+import java.util.ArrayList;
+
+
+public class User implements IDatabaseEntity {
+    private String name;
+    private String email;
+    private String key;
 
     public  User() {
 
@@ -19,10 +24,11 @@ public class User {
         this.key = key;
     }
 
-    public String showUserDataAsJson() {
-        return "name: " + this.name + "," +
-                "email: " + this.email + "," +
-                "key: " + this.key +
-                "}";
+    public ArrayList<String> getAttributes() {
+        ArrayList<String> attributes = new ArrayList<>();
+        attributes.add(this.name);
+        attributes.add(this.email);
+        attributes.add(this.key);
+        return attributes;
     }
 }
