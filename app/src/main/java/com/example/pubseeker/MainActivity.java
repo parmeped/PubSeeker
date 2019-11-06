@@ -5,9 +5,21 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
+
+import java.io.Console;
+import java.net.ConnectException;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager mslideViewPager;
@@ -16,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView[] mDots;
 
     private SliderAdapter sliderAdapter;
+<<<<<<< HEAD
+=======
+    private static final String TAG = "MainActivity";
+>>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
 
 
     @Override
@@ -32,12 +48,26 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
+<<<<<<< HEAD
 
 
 
 
 
     }
+=======
+        User user = new User("15","Pepote","Eai");
+        AnotherClassTesting anotherClassTesting = new AnotherClassTesting("Hello","world");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseContext context = new DatabaseContext(database, "MainActivity");
+        context.dataWriter(user, "Users");
+        context.dataWriter(anotherClassTesting, "SomeCollection");
+
+        dataReader();
+    }
+
+>>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
     public void addDotsIndicator(int position){
         mDots = new TextView[3];
         mDotLayout.removeAllViews();
@@ -57,6 +87,40 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD
+=======
+    private void dataWriter() {
+        FirebaseDatabase database =  FirebaseDatabase.getInstance();
+        String userId = "16";
+        User user = new User(userId, "Another User", "another@userDomain.com");
+        DatabaseReference mRef = database.getReference().child("Users").child(userId);
+        mRef.setValue(user);
+    }
+
+    private void dataReader() {
+        // Read from the database
+        FirebaseDatabase database =  FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+        DatabaseReference userValues = myRef.child("Users");
+        userValues.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                    User user = singleSnapshot.getValue(User.class);
+                    user.setKey(singleSnapshot.getKey().toString());
+                    Log.d(TAG, "Value is: " + user.getAttributes());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+>>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
       @Override
       public void onPageScrolled(int i, float v, int j){

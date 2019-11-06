@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "191922726858",
+    "firebase_url": "https://pubseeker-cd16e.firebaseio.com",
+    "project_id": "pubseeker-cd16e",
+    "storage_bucket": "pubseeker-cd16e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191922726858:android:b23dd91405d07cb40f1133",
+        "android_client_info": {
+          "package_name": "com.example.pubseeker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191922726858-4u7m17uu1q9e16d8h32bcp994e6bdehb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pubseeker",
+            "certificate_hash": "d838816eb5c616fbc1c479a040527ca60b5c3785"
+          }
+        },
+        {
+          "client_id": "191922726858-phr4297lp68ccnnm6mt5ggcbth0i0juf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pubseeker",
+            "certificate_hash": "029c6204f3e36488840202ab29f73bef778619bd"
+          }
+        },
+        {
+          "client_id": "191922726858-ipj88s10dci7m61foq7a1bvulbn062v1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCplLhLSclHvUYOZ0Sx_dYbeGkfhArmKvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191922726858-ipj88s10dci7m61foq7a1bvulbn062v1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191922726858:android:f690eed435d467220f1133",
+        "android_client_info": {
+          "package_name": "com.example.pubseeker_bis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191922726858-tnbf9qr0jearpe09deh30v45dogim38m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pubseeker_bis",
+            "certificate_hash": "d838816eb5c616fbc1c479a040527ca60b5c3785"
+          }
+        },
+        {
+          "client_id": "191922726858-ipj88s10dci7m61foq7a1bvulbn062v1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCplLhLSclHvUYOZ0Sx_dYbeGkfhArmKvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191922726858-ipj88s10dci7m61foq7a1bvulbn062v1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

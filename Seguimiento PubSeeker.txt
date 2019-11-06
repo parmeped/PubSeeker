@@ -1,0 +1,27 @@
+
+
+////            22/10/19            ////
+
+LOGIN (Adrian)
+- Boton google registrarse en firebase
+
+
+LAYOUTS
+Backgrounds, botones, about
+
+
+
+base de datos (Pedro)
+- tabla de usuario (mail, contraseña,idUser,array idBar)
+- tabla de bares (nombre, gps, idBar)
+
+
+
+Flujo de la App
+
+main - login - home(boton pinta que te lleva al mapa) - mapa (en la zona, bares marcados con una pinta) - favoritos (lista de bares) - desc del bar - about
+
+En el mapa, deberia haber un boton flotante con signo "+" que agrege el bar a Firebase, y el IDbar al array del usuario.
+
+
+
