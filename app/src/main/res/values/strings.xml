@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">PubSeeker</string>
+    <string name="heading">HEADING</string>
+    <string name="heading_description"></string>
+    <string name="beerButton">beerButton</string>
+    <string name="beerBackground">beerBackground</string>
+    <string name="googleButton">googleButton</string>
+    <string name="pubseekerLogo">pubseekerLogo</string>
+    <string name="aboutTitle">Desarrollado por:</string>
+    <string name="Adrian">Adrian Rubado</string>
+    <string name="Christian">Christian Gallelli</string>
+    <string name="Pedro">Pedro Parmeggiani</string>
+
+
+
+
+</resources>
