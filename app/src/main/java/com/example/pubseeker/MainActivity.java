@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mslideViewPager;
     private LinearLayout mDotLayout;
 
+<<<<<<< HEAD
     private TextView[] mDots;
 
     private SliderAdapter sliderAdapter;
@@ -32,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
 =======
     private static final String TAG = "MainActivity";
 >>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
+=======
+    private ImageView i;
+
+    private TextView[] mDots;
+
+    private SliderAdapter sliderAdapter;
+>>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
 
 
     @Override
@@ -39,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+<<<<<<< HEAD
+=======
+
+        i = findViewById(R.id.slide_image);
+
+>>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
         mslideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
 
@@ -49,12 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
         mslideViewPager.addOnPageChangeListener(viewListener);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
 
 
 
 
 
     }
+<<<<<<< HEAD
 =======
         User user = new User("15","Pepote","Eai");
         AnotherClassTesting anotherClassTesting = new AnotherClassTesting("Hello","world");
@@ -68,6 +86,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 >>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
+=======
+
+    public void onClick(View v) {
+
+
+        Intent myIntent = new Intent(MainActivity.this, Maps.class);
+        startActivity(myIntent);
+
+//sigo aca
+        }
+
+
+
+
+>>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
     public void addDotsIndicator(int position){
         mDots = new TextView[3];
         mDotLayout.removeAllViews();
@@ -87,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     private void dataWriter() {
@@ -123,6 +157,15 @@ public class MainActivity extends AppCompatActivity {
 >>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
       @Override
+=======
+    ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
+
+
+
+
+
+        @Override
+>>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
       public void onPageScrolled(int i, float v, int j){
 
       }
@@ -137,4 +180,9 @@ public class MainActivity extends AppCompatActivity {
 
       }
     };
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
 }
