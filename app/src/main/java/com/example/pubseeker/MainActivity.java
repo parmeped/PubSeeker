@@ -15,31 +15,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.io.Console;
-import java.net.ConnectException;
-import java.util.logging.Logger;
-
 public class MainActivity extends AppCompatActivity {
     private ViewPager mslideViewPager;
     private LinearLayout mDotLayout;
 
-<<<<<<< HEAD
     private TextView[] mDots;
 
     private SliderAdapter sliderAdapter;
-<<<<<<< HEAD
-=======
     private static final String TAG = "MainActivity";
->>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
-=======
-    private ImageView i;
-
-    private TextView[] mDots;
-
-    private SliderAdapter sliderAdapter;
->>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
 
 
     @Override
@@ -47,12 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
-=======
-
-        i = findViewById(R.id.slide_image);
-
->>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
         mslideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
 
@@ -62,18 +39,6 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
-
-
-
-
-
-    }
-<<<<<<< HEAD
-=======
         User user = new User("15","Pepote","Eai");
         AnotherClassTesting anotherClassTesting = new AnotherClassTesting("Hello","world");
 
@@ -85,22 +50,6 @@ public class MainActivity extends AppCompatActivity {
         dataReader();
     }
 
->>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
-=======
-
-    public void onClick(View v) {
-
-
-        Intent myIntent = new Intent(MainActivity.this, Maps.class);
-        startActivity(myIntent);
-
-//sigo aca
-        }
-
-
-
-
->>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
     public void addDotsIndicator(int position){
         mDots = new TextView[3];
         mDotLayout.removeAllViews();
@@ -118,17 +67,6 @@ public class MainActivity extends AppCompatActivity {
             mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
         }
 
-    }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private void dataWriter() {
-        FirebaseDatabase database =  FirebaseDatabase.getInstance();
-        String userId = "16";
-        User user = new User(userId, "Another User", "another@userDomain.com");
-        DatabaseReference mRef = database.getReference().child("Users").child(userId);
-        mRef.setValue(user);
     }
 
     private void dataReader() {
@@ -154,35 +92,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
->>>>>>> fdf4c402670fe6a0b06f03d8d02bf7a4690cb1a5
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
-      @Override
-=======
-    ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
+        @Override
+        public void onPageScrolled(int i, float v, int j){
 
-
-
-
+        }
 
         @Override
->>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
-      public void onPageScrolled(int i, float v, int j){
-
-      }
-
-      @Override
         public void onPageSelected(int i){
-          addDotsIndicator(i);
-      }
+            addDotsIndicator(i);
+        }
 
-      @Override
+        @Override
         public void onPageScrollStateChanged(int i){
 
-      }
+        }
     };
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 4b2e0e4cf531810dbd0b0da89fd665813224f882
 }
