@@ -3,16 +3,23 @@ package com.example.pubseeker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
+import android.graphics.ImageDecoder;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager mslideViewPager;
     private LinearLayout mDotLayout;
+
+    private ImageView i;
 
     private TextView[] mDots;
 
@@ -23,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        i = findViewById(R.id.slide_image);
 
         mslideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
@@ -39,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void onClick(View v) {
+
+
+        Intent myIntent = new Intent(MainActivity.this, Maps.class);
+        startActivity(myIntent);
+
+//sigo aca
+        }
+
+
+
+
     public void addDotsIndicator(int position){
         mDots = new TextView[3];
         mDotLayout.removeAllViews();
@@ -59,7 +82,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
-      @Override
+
+
+
+
+
+        @Override
       public void onPageScrolled(int i, float v, int j){
 
       }
@@ -74,4 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
       }
     };
+
+
 }

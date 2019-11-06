@@ -2,4 +2,6 @@
     <string name="app_name">PubSeeker</string>
     <string name="heading">HEADING</string>
     <string name="heading_description"></string>
+    <string name="title_activity_beer">Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

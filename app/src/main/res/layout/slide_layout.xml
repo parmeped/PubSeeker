@@ -13,7 +13,8 @@
         android:layout_marginStart="147dp"
         android:layout_marginTop="100dp"
         android:contentDescription="todo"
-        app:srcCompat="@drawable/eat_icon" />
+        android:onClick="onClick"
+        android:src="@drawable/eat_icon" />
 
     <TextView
         android:id="@+id/slide_heading"
