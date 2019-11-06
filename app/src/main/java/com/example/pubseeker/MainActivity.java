@@ -45,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
-        dataWriter();
+        User user = new User("15","Pepote","Eai");
+        AnotherClassTesting anotherClassTesting = new AnotherClassTesting("Hello","world");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseContext context = new DatabaseContext(database, "MainActivity");
+        context.dataWriter(user, "Users");
+        context.dataWriter(anotherClassTesting, "SomeCollection");
+
         dataReader();
     }
 
@@ -87,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     User user = singleSnapshot.getValue(User.class);
                     user.setKey(singleSnapshot.getKey().toString());
-                    Log.d(TAG, "Value is: " + user.showUserDataAsJson());
+                    Log.d(TAG, "Value is: " + user.getAttributes());
                 }
             }
 
