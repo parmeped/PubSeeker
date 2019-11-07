@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -19,7 +20,6 @@ public class HomeActivity extends AppCompatActivity {
 
         Button btn = findViewById(R.id.beerButton);
         btn.setOnClickListener(this::onClick);
-
     }
 
     @Override

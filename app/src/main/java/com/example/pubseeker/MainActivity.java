@@ -39,15 +39,6 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mslideViewPager.addOnPageChangeListener(viewListener);
-        User user = new User("15","Pepote","Eai");
-        AnotherClassTesting anotherClassTesting = new AnotherClassTesting("Hello","world");
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseContext context = new DatabaseContext(database, "MainActivity");
-        context.dataWriter(user, "Users");
-        context.dataWriter(anotherClassTesting, "SomeCollection");
-
-        dataReader();
     }
 
     public void addDotsIndicator(int position){

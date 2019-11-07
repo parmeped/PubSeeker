@@ -14,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -43,6 +44,12 @@ public class SignInActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
+
+        User user = new User("15","Pepote","Eai");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseContext context = new DatabaseContext(database, "MainActivity");
+        context.dataWriter(user, "Users");
 
     }
 

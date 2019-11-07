@@ -1,7 +1,7 @@
 package com.example.pubseeker.Common;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
 
 public interface IDatabaseEntity {
-    public ArrayList<String> getAttributes();
+    JSONObject getAttributes();
 }
