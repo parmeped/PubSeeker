@@ -1,13 +1,17 @@
 package com.esri.android.nearbyplaces.Main;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.esri.android.nearbyplaces.R;
+import com.esri.android.nearbyplaces.places.PlacesActivity;
+import com.esri.android.nearbyplaces.places.PlacesContract;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
     }
+
+    public void onClick(View v){
+
+
+
+            Intent myIntent = new Intent(MainActivity.this, PlacesActivity.class);
+            startActivity(myIntent);
+
+//sigo aca
+        }
+
 
     public void addDotsIndicator(int position) {
         mDots = new TextView[3];
