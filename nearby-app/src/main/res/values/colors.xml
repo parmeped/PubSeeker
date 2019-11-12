@@ -6,4 +6,5 @@
     <color name="colorText">#ffffff</color>
     <drawable name="touchFeedback">#CFD8DC</drawable>
     <color name="lineColor">#12000000</color>
+
 </resources>

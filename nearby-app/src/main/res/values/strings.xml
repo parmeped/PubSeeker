@@ -36,5 +36,7 @@
     <string name="nearby_places">Nearby Places</string>
     <string name="map_fragment">map fragment</string>
     <string name="route_fragment">route fragment</string>
+    <string name="heading">HEADING</string>
+    <string name="textview">TextView</string>
 
 </resources>
