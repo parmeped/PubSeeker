@@ -59,4 +59,5 @@ dependencies {
     // Google location services
     implementation "com.google.android.gms:play-services-location:$rootProject.googleLocationServicesVersion"
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
