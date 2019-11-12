@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.esri.android.nearbyplaces.R;
+import com.esri.android.nearbyplaces.map.MapActivity;
 import com.esri.android.nearbyplaces.places.PlacesActivity;
 import com.esri.android.nearbyplaces.places.PlacesContract;
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            Intent myIntent = new Intent(MainActivity.this, PlacesActivity.class);
+            Intent myIntent = new Intent(MainActivity.this, Login.class);
             startActivity(myIntent);
 
 //sigo aca
