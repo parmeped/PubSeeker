@@ -548,18 +548,17 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
   @Override
   public final void onPrepareOptionsMenu(final Menu menu){
     final MenuItem listItem = menu.findItem(R.id.list_action);
-    final MenuItem routeItem = menu.findItem(R.id.route_action);
-    final MenuItem filterItem = menu.findItem(R.id.filter_in_map);
+
 
 
     if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
       listItem.setVisible(true);
-      filterItem.setVisible(true);
-      routeItem.setVisible(false);
+
+
     }else if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
       listItem.setVisible(false);
-      filterItem.setVisible(true);
-      routeItem.setVisible(true);
+
+
     }
   }
 
