@@ -24,16 +24,22 @@
 
 package com.esri.android.nearbyplaces.map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.esri.android.nearbyplaces.Main.MainActivity;
 import com.esri.android.nearbyplaces.R;
 import com.esri.android.nearbyplaces.filter.FilterContract;
+import com.esri.android.nearbyplaces.places.PlacesActivity;
 import com.esri.android.nearbyplaces.route.RouteDirectionsFragment;
 import com.esri.android.nearbyplaces.util.ActivityUtils;
 import com.esri.arcgisruntime.security.AuthenticationChallengeHandler;
@@ -46,6 +52,7 @@ import java.util.List;
 public class MapActivity extends AppCompatActivity implements FilterContract.FilterView {
 
   private MapPresenter mMapPresenter = null;
+  private TextView t;
 
   @Override
   protected final void onCreate(final Bundle savedInstanceState) {
@@ -56,6 +63,15 @@ public class MapActivity extends AppCompatActivity implements FilterContract.Fil
     setUpMapFragment();
 
     setUpAuth();
+
+    t = findViewById(R.id.addFavorite);
+    t.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent myIntent = new Intent(MapActivity.this, MainActivity.class);
+        startActivity(myIntent);
+      }
+    });
 
   }
 
