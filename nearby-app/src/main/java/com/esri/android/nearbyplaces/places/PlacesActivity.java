@@ -67,6 +67,7 @@ public class PlacesActivity extends AppCompatActivity implements FilterContract.
 
   private static boolean mUserDeniedPermission = false;
 
+
   @Override
   public final void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
