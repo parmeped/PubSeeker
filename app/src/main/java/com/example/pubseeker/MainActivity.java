@@ -5,15 +5,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager mslideViewPager;
@@ -22,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView[] mDots;
 
     private SliderAdapter sliderAdapter;
-    private static final String TAG = "MainActivity";
 
 
     @Override
@@ -58,29 +50,6 @@ public class MainActivity extends AppCompatActivity {
             mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
         }
 
-    }
-
-    private void dataReader() {
-        // Read from the database
-        FirebaseDatabase database =  FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-        DatabaseReference userValues = myRef.child("Users");
-        userValues.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    User user = singleSnapshot.getValue(User.class);
-                    user.setKey(singleSnapshot.getKey().toString());
-                    Log.d(TAG, "Value is: " + user.getAttributes());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){

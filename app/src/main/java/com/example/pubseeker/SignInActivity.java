@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.pubseeker.Services.EntityService;
+import com.example.pubseeker.Services.ServicesConfiguration;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -45,11 +47,12 @@ public class SignInActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
 
-        User user = new User("15","Pepote","Eai");
+        ServicesConfiguration config = new ServicesConfiguration();
+        EntityService usersService = config.getUsersService();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseContext context = new DatabaseContext(database, "MainActivity");
-        context.dataWriter(user, "Users");
+        User user = new User("15","LA CONCHA DE TU HERMANA","Eai", null);
+
+        usersService.save(user);
 
     }
 
