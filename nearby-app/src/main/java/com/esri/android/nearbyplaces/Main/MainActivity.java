@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            Intent myIntent = new Intent(MainActivity.this, Login.class);
+            Intent myIntent = new Intent(MainActivity.this, PlacesActivity.class);
             startActivity(myIntent);
 
 //sigo aca
