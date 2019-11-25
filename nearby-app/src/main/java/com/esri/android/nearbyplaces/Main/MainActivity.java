@@ -5,14 +5,21 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.esri.android.nearbyplaces.Entities.Bar;
+import com.esri.android.nearbyplaces.Entities.User;
 import com.esri.android.nearbyplaces.R;
+import com.esri.android.nearbyplaces.Services.EntityService;
+import com.esri.android.nearbyplaces.Services.ServicesConfiguration;
 import com.esri.android.nearbyplaces.map.MapActivity;
 import com.esri.android.nearbyplaces.places.PlacesActivity;
 import com.esri.android.nearbyplaces.places.PlacesContract;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +45,33 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
+
+        EntityService usersService = ServicesConfiguration.getUsersService();
+        EntityService barsService = ServicesConfiguration.getBarsService();
+
+        User user = new User("1", "testing", "super@mail.com",null);
+        Bar bar = new Bar("super bar", "1354112312.45", "1");
+
+
+        try {
+            //usersService.save(user);
+            barsService.save(bar);
+        }
+        catch (Exception ex) {
+            Log.e("Main Activity", "Problema save() con entidad",  ex); // el EntityService tira exception si no tiene un mapper.
+        }
+        ArrayList<Integer> list = usersService.getCollection();
+
+
+        Log.i("Main Activity", "searching by id 1");
+
+        try {
+            User entity = usersService.searchById("LPmCkGzYosg25CPEJIOB");
+            Log.i("Main Activity", "Found entity! showing mail: " + entity.getEmail());
+        }
+        catch (Exception e) {
+            Log.e("Main Activity", "Error searching for entity!", e);
+        }
     }
 
     public void onClick(View v){
