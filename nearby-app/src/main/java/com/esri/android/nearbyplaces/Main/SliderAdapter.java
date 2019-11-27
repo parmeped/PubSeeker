@@ -24,8 +24,8 @@ public class SliderAdapter extends PagerAdapter {
 
     public int [] slide_images ={
             R.drawable.pint,
-            R.drawable.checklist,
-            R.drawable.question
+            R.drawable.clipboards,
+            R.drawable.group
 
     };
 
@@ -36,9 +36,9 @@ public class SliderAdapter extends PagerAdapter {
     };
 
     public String[] slide_descs ={
-        "birra birra birra",
-         "favoritos",
-          "Acerrrrrca"
+        "Dale a la Birra y a disfrutar!",
+         "Bares favoritos",
+          "Dev Team"
     };
 
     @Override
