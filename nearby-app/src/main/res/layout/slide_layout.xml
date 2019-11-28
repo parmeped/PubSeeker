@@ -15,23 +15,9 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="270dp"
         android:layout_marginEnd="88dp"
-        android:contentDescription="TODO"
+        android:contentDescription="slide_button"
         android:onClick="onClick"
         app:srcCompat="@drawable/pint" />
-
-    <TextView
-        android:id="@+id/slide_heading"
-        android:layout_width="140dp"
-        android:layout_height="53dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="648dp"
-        android:layout_marginEnd="136dp"
-        android:gravity="center"
-        android:text="@string/heading"
-        android:textSize="20sp"
-        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/slide_desc"
@@ -42,7 +28,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="158dp"
         android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="#000000"
         android:text="@string/textview"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 </RelativeLayout>
