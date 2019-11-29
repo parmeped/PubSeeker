@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.esri.android.nearbyplaces.Entities.Bar;
 import com.esri.android.nearbyplaces.Entities.User;
@@ -20,12 +21,15 @@ import com.esri.android.nearbyplaces.places.PlacesActivity;
 import com.esri.android.nearbyplaces.places.PlacesContract;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
     private TextView[] mDots;
+    private int j;
+
 
     private SliderAdapter sliderAdapter;
 
@@ -75,21 +79,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View v){
+        Intent pub;
+        switch(j){
 
-
-
-            Intent myIntent = new Intent(MainActivity.this, PlacesActivity.class);
-            startActivity(myIntent);
-
-//sigo aca
+            case 0:
+                pub = new Intent(MainActivity.this, PlacesActivity.class);
+                startActivity(pub);
+                break;
+            case 1:
+                Toast.makeText(this, "Aca vendria la activity de favoritos", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                pub = new Intent(MainActivity.this, About.class);
+                startActivity(pub);
+                break;
         }
 
 
+        }
+
+
+
+
+
+//sigo aca
+
+
+
     public void addDotsIndicator(int position) {
+
         mDots = new TextView[3];
         mDotLayout.removeAllViews();
-        for (int i = 0; i < mDots.length; i++) {
-
+        for ( int i = 0; i < mDots.length; i++) {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
@@ -102,13 +123,14 @@ public class MainActivity extends AppCompatActivity {
         if(mDots.length > 0){
             mDots[position].setTextColor(getResources().getColor(R.color.design_default_color_primary));
         }
+
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageScrolled(int i, float v, int i1) {
-
+           j = i;
         }
 
         @Override

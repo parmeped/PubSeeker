@@ -29,8 +29,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("63419389572-1s3btadevqdaido2ht9ehtih5pt1dpfa.apps.googleusercontent.com")
-                .build();
+                .requestEmail().build();
 
         signin = findViewById(R.id.sign_in_button);
         signin.setOnClickListener(new View.OnClickListener() {

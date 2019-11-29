@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.esri.android.nearbyplaces.R;
 
 import org.w3c.dom.Text;
 
 public class SliderAdapter extends PagerAdapter {
+    public int posicion;
     Context context;
     LayoutInflater layoutInflater;
 
@@ -58,11 +60,13 @@ public class SliderAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.slide_layout,container,false);
         ImageView slideImageView = (ImageView) view.findViewById(R.id.slide_image);
         TextView slideDescription = (TextView) view.findViewById(R.id.slide_desc);
-
+        posicion = position;
         slideImageView.setImageResource(slide_images[position]);
         slideDescription.setText((slide_descs[position]));
 
         container.addView(view);
+
+
 
         return view;
     }
@@ -72,4 +76,6 @@ public class SliderAdapter extends PagerAdapter {
 
         container.removeView((RelativeLayout) object);
     }
+
+    public int getPosicion(){return posicion;}
 }
