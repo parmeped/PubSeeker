@@ -128,7 +128,7 @@ public class CategoryHelper {
     final int d;
     switch (category){
       case "Pizza":
-        d = R.drawable.pizza_pin;
+        d = R.drawable.pizza_slice ;
         break;
       case "Hotel":
         d = R.drawable.hotel_pin;
@@ -140,7 +140,7 @@ public class CategoryHelper {
         d = R.drawable.beer;
         break;
       case "Coffee Shop":
-        d = R.drawable.cafe_pin;
+        d = R.drawable.coffee_pot;
         break;
       default:
         d = R.drawable.empty_pin;
