@@ -137,7 +137,7 @@ public class CategoryHelper {
         d = R.drawable.restaurant_pin;
         break;
       case "Bar or Pub":
-        d = R.drawable.bar_pin;
+        d = R.drawable.beer;
         break;
       case "Coffee Shop":
         d = R.drawable.cafe_pin;
