@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.esri.android.nearbyplaces.R;
+import com.esri.android.nearbyplaces.Services.EntityService;
+import com.esri.android.nearbyplaces.Services.ServicesConfiguration;
 import com.esri.android.nearbyplaces.map.MapActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -31,6 +33,8 @@ public class Login extends AppCompatActivity {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().build();
 
+        EntityService usersService = ServicesConfiguration.getUsersService(); // initialize
+
         signin = findViewById(R.id.sign_in_button);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,12 +48,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
-
-
     }
 
     private void signIn() {

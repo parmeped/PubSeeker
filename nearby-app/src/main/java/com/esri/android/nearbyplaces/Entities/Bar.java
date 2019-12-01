@@ -1,6 +1,8 @@
 package com.esri.android.nearbyplaces.Entities;
 
-public class Bar {
+import com.esri.android.nearbyplaces.Common.IEntity;
+
+public class Bar implements IEntity {
     private String _name;
     private String _gps;
     private String _barId;
@@ -25,5 +27,9 @@ public class Bar {
 
     public String getId() {
         return this._barId;
+    }
+
+    public void setId(String id) {
+        this._barId = id;
     }
 }

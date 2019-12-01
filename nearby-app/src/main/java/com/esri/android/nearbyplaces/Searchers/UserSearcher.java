@@ -1,6 +1,7 @@
 package com.esri.android.nearbyplaces.Searchers;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.esri.android.nearbyplaces.Common.IEntitySearcher;
@@ -14,6 +15,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.concurrent.Callable;
 
 
 public class UserSearcher implements IEntitySearcher {
@@ -21,6 +24,8 @@ public class UserSearcher implements IEntitySearcher {
     private FirebaseFirestore _reference;
     private String _collection;
     private String _TAG;
+    private ArrayList<User> _foundUsers;
+    private int _lastId;
 
     public UserSearcher(FirebaseFirestore ref, String coll, String tag) {
         this._reference = ref;
@@ -29,8 +34,7 @@ public class UserSearcher implements IEntitySearcher {
     }
 
     @Override
-    public <T> ArrayList<T> getCollection() {
-        ArrayList<Integer> list = new ArrayList<>();
+    public void prepareData() {
         try {
             _reference.collection(_collection)
                     .get()
@@ -38,10 +42,14 @@ public class UserSearcher implements IEntitySearcher {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
+                                _foundUsers = new ArrayList<>();
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Log.i(_TAG, "Showing collection!");
-                                    Log.d(_TAG, document.getId() + " => " + document.getData());
+                                    Log.i(_TAG, "Entity found, adding it to collection!");
+                                    User userFound = document.toObject(User.class);
+                                    userFound.setId(document.getId());
+                                    _foundUsers.add(userFound);
                                 }
+                                _lastId = setLastId();
                             }
                             else {
                                 Log.w(_TAG, "Error getting documents.", task.getException());
@@ -52,31 +60,47 @@ public class UserSearcher implements IEntitySearcher {
         catch (Exception ex) {
             Log.e("Error getting coll.", ex.toString());
         }
-        return (ArrayList<T>) list;
     }
 
     @Override
     public <T> T searchById(String entityId) {
-        User returnedUser = new User();
-        this.get(entityId, returnedUser);
-        return (T) returnedUser;
+        if (this._foundUsers == null) {
+            Log.i(_TAG, "No document present yet, querying db.");
+            this.prepareData();
+            return null;
+        }
+        else {
+            return (T) this.get(entityId);
+        }
     }
 
-    private void get(String entityId, User returnedUser) {
-        DocumentReference docRef = _reference.collection(_collection).document(entityId);
-        docRef
-            .get()
-            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    User user = documentSnapshot.toObject(User.class);
-                    returnedUser.setUserId(user.getId());
-                    returnedUser.setEmail(user.getEmail());
-                    returnedUser.setBars(user.getBars());
-                    returnedUser.setName(user.getName());
-                    Log.i("Main Activity", "returned user mail " + returnedUser.getEmail());
-                }
-            });
+    private User get(String entityId) {
+        for (User u : _foundUsers) {
+            if (u.getId().equals(entityId)) {
+                Log.i(_TAG, "User found! id: " + entityId);
+                return u;
+            }
+        }
+        Log.i(_TAG, "User was not found! id: " + entityId);
+        return null;
     }
 
+    @Override
+    public int getLastId() {
+        return this._lastId;
+    }
+
+    private int setLastId() {
+        // hice un custom for loop porq ni idea que puto metodo lo devuelve haciendo un loop con strings.
+        int maxId = -1;
+        int i = 1; // size, no index.
+        maxId = Integer.parseInt(this._foundUsers.get(0).getId()); // arrancar por el primero!
+        while (i < this._foundUsers.size()) {
+            i++;
+            if (maxId > Integer.parseInt(this._foundUsers.get(i).getId())) {
+                maxId = Integer.parseInt(this._foundUsers.get(i).getId());
+            }
+        }
+        return maxId;
+    }
 }

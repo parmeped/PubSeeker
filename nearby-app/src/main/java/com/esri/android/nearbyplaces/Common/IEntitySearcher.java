@@ -1,10 +1,8 @@
 package com.esri.android.nearbyplaces.Common;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
-
 public interface IEntitySearcher {
+    int getLastId();
     <T> T searchById(String entityId);
-    <T> ArrayList<T> getCollection();
+    void prepareData();
 }
+

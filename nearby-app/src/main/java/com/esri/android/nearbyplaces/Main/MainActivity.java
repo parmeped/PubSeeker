@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.esri.android.nearbyplaces.Common.IEntitySearcher;
 import com.esri.android.nearbyplaces.Entities.Bar;
 import com.esri.android.nearbyplaces.Entities.User;
 import com.esri.android.nearbyplaces.R;
@@ -58,19 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         try {
-            //usersService.save(user);
+            usersService.save(user);
             barsService.save(bar);
         }
         catch (Exception ex) {
             Log.e("Main Activity", "Problema save() con entidad",  ex); // el EntityService tira exception si no tiene un mapper.
         }
-        ArrayList<Integer> list = usersService.getCollection();
-
-
-        Log.i("Main Activity", "searching by id 1");
 
         try {
+            Log.i("Main Activity", "searching by id 1");
             User entity = usersService.searchById("LPmCkGzYosg25CPEJIOB");
+
             Log.i("Main Activity", "Found entity! showing mail: " + entity.getEmail());
         }
         catch (Exception e) {

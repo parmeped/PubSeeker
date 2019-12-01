@@ -1,9 +1,11 @@
 package com.esri.android.nearbyplaces.Entities;
 
+import com.esri.android.nearbyplaces.Common.IEntity;
+
 import java.util.ArrayList;
 
 
-public class User {
+public class User implements IEntity {
     private String _name;
     private String _email;
     private String _userId;
@@ -48,7 +50,7 @@ public class User {
         this._email = email;
     }
 
-    public void setUserId(String userId) {
+    public void setId(String userId) {
         this._userId = userId;
     }
 
