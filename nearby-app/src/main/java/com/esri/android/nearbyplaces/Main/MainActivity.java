@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
         EntityService usersService = ServicesConfiguration.getUsersService();
         EntityService barsService = ServicesConfiguration.getBarsService();
 
-        User user = new User("1", "testing", "super@mail.com",null);
+        User user = new User("testing", "super@mail.com",null);
 
-        Bar bar = new Bar("super bar", "1354112312.45", "1");
-        Bar bar1 = new Bar("Master bar", "1354112312.45", "2");
-        Bar bar2 = new Bar("Hyper Bar", "1354112312.45", "3");
+        Bar bar = new Bar("super bar", "1354112312.45");
+        Bar bar1 = new Bar("Master bar", "1354112312.45");
+        Bar bar2 = new Bar("Hyper Bar", "1354112312.45");
         ArrayList<Bar> bars = new ArrayList<>();
         bars.add(bar);
 

@@ -11,10 +11,9 @@ public class Bar implements IEntity {
 
     }
 
-    public Bar(String name, String gps, String barId) {
+    public Bar(String name, String gps) {
         this._name = name;
         this._gps = gps;
-        this._barId = barId;
     }
 
     public String getName() {

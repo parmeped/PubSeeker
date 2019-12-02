@@ -1,8 +1,9 @@
 package com.esri.android.nearbyplaces.Common;
 
 public interface IEntitySearcher {
-    int getLastId();
+    int returnLastId();
     <T> T searchById(String entityId);
     void prepareData();
+    void setLastId(String lastId);
 }
 

@@ -1,7 +1,6 @@
 package com.esri.android.nearbyplaces.Services;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.esri.android.nearbyplaces.Common.IEntity;
@@ -11,13 +10,10 @@ import com.esri.android.nearbyplaces.Common.IEntityService;
 import com.esri.android.nearbyplaces.CustomExceptions.BussinessException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 
 public class EntityService implements IEntityService {
@@ -51,7 +47,10 @@ public class EntityService implements IEntityService {
         }
         Map<String, Object> hashMap = new HashMap<>();
         T entity = _mapper.map((HashMap) hashMap, (T) entityToSave);
-        entityToSave.setId(getNextId());
+        if (entityToSave.getId() == null || entityToSave.getId().isEmpty()) {
+            entityToSave.setId(getNextId());
+            this._searcher.setLastId(getNextId());
+        }
         try {
             _reference.collection(_collection)
             .document(entityToSave.getId())
@@ -83,7 +82,7 @@ public class EntityService implements IEntityService {
     }
 
     public String getNextId() {
-        return String.valueOf(this._searcher.getLastId() + 1);
+        return String.valueOf(this._searcher.returnLastId() + 1);
     }
 
     public <T, U> void update(T oldEntity, U updatedEntity) {

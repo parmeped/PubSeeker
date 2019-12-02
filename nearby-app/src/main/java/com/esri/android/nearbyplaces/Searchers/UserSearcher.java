@@ -50,7 +50,7 @@ public class UserSearcher implements IEntitySearcher {
                                     userFound.setId(document.getId());
                                     _foundUsers.add(userFound);
                                 }
-                                _lastId = setLastId();
+                                _lastId = getLastId();
                             }
                             else {
                                 Log.w(_TAG, "Error getting documents.", task.getException());
@@ -87,11 +87,11 @@ public class UserSearcher implements IEntitySearcher {
     }
 
     @Override
-    public int getLastId() {
+    public int returnLastId() {
         return this._lastId;
     }
 
-    private int setLastId() {
+    private int getLastId() {
         // hice un custom for loop porq ni idea que puto metodo lo devuelve haciendo un loop con strings.
         int maxId = 0;
         int i = 1; // size, no index.
@@ -110,5 +110,9 @@ public class UserSearcher implements IEntitySearcher {
     public ArrayList<Bar> getFavoriteBars(String userId) {
         User user = this.searchById(userId);
         return user.getBars();
+    }
+
+    public void setLastId(String lastId) {
+        this._lastId = Integer.parseInt(lastId);
     }
 }

@@ -14,8 +14,7 @@ public class User implements IEntity {
 
     public User(){};
 
-    public User(String userId, String name, String email, ArrayList<Bar> bars) {
-        this._userId = userId;
+    public User(String name, String email, ArrayList<Bar> bars) {
         this._name = name;
         this._email = email;
         if (bars == null) {
