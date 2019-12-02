@@ -32,4 +32,8 @@ public class Bar implements IEntity {
     public void setId(String id) {
         this._barId = id;
     }
+
+    public void setName(String name) {this._name = name;}
+
+    public void setGps(String gps) {this._gps = gps;}
 }

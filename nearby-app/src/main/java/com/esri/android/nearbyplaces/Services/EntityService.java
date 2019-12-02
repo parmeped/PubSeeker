@@ -8,6 +8,7 @@ import com.esri.android.nearbyplaces.Common.IEntity;
 import com.esri.android.nearbyplaces.Common.IEntityMapper;
 import com.esri.android.nearbyplaces.Common.IEntitySearcher;
 import com.esri.android.nearbyplaces.Common.IEntityService;
+import com.esri.android.nearbyplaces.CustomExceptions.BussinessException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -50,7 +51,7 @@ public class EntityService implements IEntityService {
         }
         Map<String, Object> hashMap = new HashMap<>();
         T entity = _mapper.map((HashMap) hashMap, (T) entityToSave);
-
+        entityToSave.setId(getNextId());
         try {
             _reference.collection(_collection)
             .document(entityToSave.getId())
@@ -59,6 +60,7 @@ public class EntityService implements IEntityService {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Log.d(_TAG, "DocumentSnapshot successfully written!");
+                    prepareData();
                 }
             })
             .addOnFailureListener(new OnFailureListener() {
@@ -69,7 +71,7 @@ public class EntityService implements IEntityService {
             });
         }
         catch(Exception e) {
-            Log.e("Error saving entity", e.toString());
+            Log.e(_TAG,"Error saving entity", e);
         }
     }
 
@@ -82,5 +84,16 @@ public class EntityService implements IEntityService {
 
     public String getNextId() {
         return String.valueOf(this._searcher.getLastId() + 1);
+    }
+
+    public <T, U> void update(T oldEntity, U updatedEntity) {
+        Log.i(_TAG, "Updating entity");
+        try {
+            this._mapper.updateEntity(oldEntity, updatedEntity);
+        }
+        catch (BussinessException b) {
+            Log.e(_TAG, "Error updating entity", b);
+        }
+
     }
 }

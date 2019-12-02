@@ -55,11 +55,21 @@ public class MainActivity extends AppCompatActivity {
         EntityService barsService = ServicesConfiguration.getBarsService();
 
         User user = new User("1", "testing", "super@mail.com",null);
-        Bar bar = new Bar("super bar", "1354112312.45", "1");
 
+        Bar bar = new Bar("super bar", "1354112312.45", "1");
+        Bar bar1 = new Bar("Master bar", "1354112312.45", "2");
+        Bar bar2 = new Bar("Hyper Bar", "1354112312.45", "3");
+        ArrayList<Bar> bars = new ArrayList<>();
+        bars.add(bar);
+
+        user.setBars(bars);
 
         try {
             usersService.save(user);
+            barsService.save(bar);
+            barsService.save(bar1);
+            barsService.save(bar2);
+            bar.setName("Perchulo");
             barsService.save(bar);
         }
         catch (Exception ex) {
@@ -68,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             Log.i("Main Activity", "searching by id 1");
-            User entity = usersService.searchById("LPmCkGzYosg25CPEJIOB");
+            User entity = usersService.searchById("1");
 
             Log.i("Main Activity", "Found entity! showing mail: " + entity.getEmail());
         }

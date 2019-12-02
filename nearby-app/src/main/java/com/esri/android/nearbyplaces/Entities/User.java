@@ -9,20 +9,20 @@ public class User implements IEntity {
     private String _name;
     private String _email;
     private String _userId;
-    private ArrayList<Integer> _barsId;
+    private ArrayList<Bar> _bars;
 
 
     public User(){};
 
-    public User(String userId, String name, String email, ArrayList<Integer> barsId) {
+    public User(String userId, String name, String email, ArrayList<Bar> bars) {
         this._userId = userId;
         this._name = name;
         this._email = email;
-        if (barsId == null) {
-            this._barsId = new ArrayList<>();
+        if (bars == null) {
+            this._bars = new ArrayList<>();
         }
         else {
-            this._barsId = barsId;
+            this._bars = bars;
         }
     }
 
@@ -38,8 +38,8 @@ public class User implements IEntity {
         return this._userId;
     }
 
-    public ArrayList<Integer> getBars() {
-        return this._barsId;
+    public ArrayList<Bar> getBars() {
+        return this._bars;
     }
 
     public void setName(String name) {
@@ -54,17 +54,17 @@ public class User implements IEntity {
         this._userId = userId;
     }
 
-    public void setBars(ArrayList<Integer> bars) {
-        this._barsId = bars;
+    public void setBars(ArrayList<Bar> bars) {
+        this._bars = bars;
     }
 
-    public void addBar(int barId) {
-        if (this._barsId != null) {
-            this._barsId.add(barId);
+    public void addBar(Bar aBar) {
+        if (this._bars != null) {
+            this._bars.add(aBar);
         }
     }
 
-    public void removeBar(int barId) {
+    public void removeBar(Bar bar) {
         //TODO
     }
 }

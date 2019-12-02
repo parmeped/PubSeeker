@@ -20,14 +20,16 @@ public class ServicesConfiguration extends Application {
         IEntityMapper usersMapper = new UserMapper();
         IEntityMapper barsMapper = new BarMapper();
         IEntitySearcher usersSearcher = new UserSearcher(database, "Users", "User searcher");
+        IEntitySearcher barsSearcher = new UserSearcher(database, "Bars", "Bars searcher");
 
         EntityService usersService = new EntityService(database, "Users", usersMapper, usersSearcher,"Users Service");
-        EntityService barsService = new EntityService(database, "Bars", barsMapper, null, "Bars Service");
+        EntityService barsService = new EntityService(database, "Bars", barsMapper, barsSearcher, "Bars Service");
 
         this._usersService = usersService;
         this._barsService = barsService;
 
         _usersService.prepareData();
+        _barsService.prepareData();
     }
 
     private static ServicesConfiguration instance() {
