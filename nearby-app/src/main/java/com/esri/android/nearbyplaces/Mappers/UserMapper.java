@@ -16,7 +16,7 @@ public class UserMapper implements IEntityMapper {
         User user = (User) entityToMap;
         hashMap.put("name", user.getName());
         hashMap.put("email", user.getEmail());
-        hashMap.put("barsId", user.getBars());
+        //hashMap.put("barsId", user.getBars());
         return (T) user;
     }
 
@@ -29,7 +29,7 @@ public class UserMapper implements IEntityMapper {
         }
 
         oldUser.setName(updatedUser.getName());
-        oldUser.setBars(updatedUser.getBars());
+        //oldUser.setBars(updatedUser.getBars());
         oldUser.setEmail(updatedUser.getEmail());
         return (T) oldUser;
     }
