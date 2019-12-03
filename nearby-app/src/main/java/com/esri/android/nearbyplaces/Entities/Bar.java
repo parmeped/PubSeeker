@@ -24,7 +24,7 @@ public class Bar implements IEntity {
     private String _y;
     private String _a;
 
-public Bar() {
+    public Bar() {
 
     }
 
@@ -144,5 +144,4 @@ public Bar() {
         this._y =  String.valueOf(place.getLocation().getY());
         this._a = String.valueOf(place.getLocation().getSpatialReference().getWkid());
     }
-
 }
