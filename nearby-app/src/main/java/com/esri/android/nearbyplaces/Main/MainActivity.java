@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mDotLayout;
     private TextView[] mDots;
     private int j;
-    private ImageView i;
+    ImageView i;
+
     GoogleSignInClient mGoogleSignClient;
 
 
@@ -50,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mGoogleSignClient = GoogleSignIn.getClient(this,gso);
 
-        i = findViewById(R.id.exit);
+
+
+
+
+
 
 
 
@@ -87,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
+
+        }
+
+        public void meVoy(View v){
+        mGoogleSignClient.signOut();
+            startActivity(new Intent(MainActivity.this,Login.class));
+            Toast.makeText(this, "Successfully signed out", Toast.LENGTH_SHORT).show();
 
         }
 
