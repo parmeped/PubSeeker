@@ -44,5 +44,7 @@
     <string name="CG">Christian Gallelli</string>
     <string name="PP">Pedro Parmeggeani</string>
     <string name="AR">Adrian Rubado</string>
+    <string name="todo">TODO</string>
+    <string name="slide_button">slide_button</string>
 
 </resources>

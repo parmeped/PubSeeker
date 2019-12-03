@@ -30,12 +30,17 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        signin = findViewById(R.id.sign_in_button);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().build();
 
         ServicesConfiguration.initialize(); // initialize
 
         signin = findViewById(R.id.sign_in_button);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +53,12 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
+
+
+
+
     }
 
     private void signIn() {
@@ -75,19 +85,24 @@ public class Login extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            Toast.makeText(getApplicationContext(),"exito",Toast.LENGTH_SHORT).show();
-            Intent myIntent = new Intent(Login.this, MainActivity.class);
-            startActivity(myIntent);
+            Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Login.this,MainActivity.class));
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            //Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
-            Intent myIntent = new Intent(Login.this, MainActivity.class);
-            startActivity(myIntent);
+            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+
+
 
         }
     }
 
-
-
+    @Override
+    protected void onStart() {
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount((this));
+        if(account != null){
+            startActivity(new Intent(Login.this,MainActivity.class));
+        }
+        super.onStart();
+    }
 }

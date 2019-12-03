@@ -6,11 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.esri.android.nearbyplaces.R;
+import com.esri.android.nearbyplaces.Services.EntityService;
+import com.esri.android.nearbyplaces.Services.ServicesConfiguration;
+import com.esri.android.nearbyplaces.map.MapActivity;
+import com.esri.android.nearbyplaces.places.PlacesActivity;
+import com.esri.android.nearbyplaces.places.PlacesContract;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import com.esri.android.nearbyplaces.places.PlacesActivity;
 
@@ -20,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mDotLayout;
     private TextView[] mDots;
     private int j;
+    ImageView i;
+
+    GoogleSignInClient mGoogleSignClient;
 
 
     private SliderAdapter sliderAdapter;
@@ -29,6 +41,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignClient = GoogleSignIn.getClient(this,gso);
+
+
+
+
+
+
+
+
 
         mSlideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
@@ -61,6 +86,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+        public void meVoy(View v){
+        mGoogleSignClient.signOut();
+            startActivity(new Intent(MainActivity.this,Login.class));
+            Toast.makeText(this, "Successfully signed out", Toast.LENGTH_SHORT).show();
+
+        }
+
+
 
 
 
