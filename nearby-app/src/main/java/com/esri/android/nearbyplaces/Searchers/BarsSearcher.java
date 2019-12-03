@@ -1,37 +1,28 @@
 package com.esri.android.nearbyplaces.Searchers;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.esri.android.nearbyplaces.Common.IEntitySearcher;
-import com.esri.android.nearbyplaces.CustomExceptions.BussinessException;
 import com.esri.android.nearbyplaces.Entities.Bar;
-import com.esri.android.nearbyplaces.Entities.User;
-import com.google.android.gms.common.util.NumberUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.concurrent.Callable;
 
-import io.opencensus.internal.StringUtil;
+public class BarsSearcher implements IEntitySearcher {
 
-
-public class UserSearcher implements IEntitySearcher {
 
     private FirebaseFirestore _reference;
     private String _collection;
     private String _TAG;
-    private ArrayList<User> _foundUsers;
+    private ArrayList<Bar> _foundBars;
+    private int _lastId;
 
-    public UserSearcher(FirebaseFirestore ref, String coll, String tag) {
+    public BarsSearcher(FirebaseFirestore ref, String coll, String tag) {
         this._reference = ref;
         this._collection = coll;
         this._TAG = tag;
@@ -46,13 +37,14 @@ public class UserSearcher implements IEntitySearcher {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                _foundUsers = new ArrayList<>();
+                                _foundBars = new ArrayList<>();
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     Log.i(_TAG, "Entity found, adding it to collection!");
-                                    User userFound = document.toObject(User.class);
-                                    userFound.setId(document.getId());
-                                    _foundUsers.add(userFound);
+                                    Bar barFound = document.toObject(Bar.class);
+                                    barFound.setId(document.getId());
+                                    _foundBars.add(barFound);
                                 }
+                                _lastId = getLastId();
                             }
                             else {
                                 Log.w(_TAG, "Error getting documents.", task.getException());
@@ -67,7 +59,7 @@ public class UserSearcher implements IEntitySearcher {
 
     @Override
     public <T> T searchById(String entityId) {
-        if (this._foundUsers == null) {
+        if (this._foundBars == null) {
             Log.i(_TAG, "No document present yet, querying db.");
             this.prepareData();
             return null;
@@ -77,24 +69,41 @@ public class UserSearcher implements IEntitySearcher {
         }
     }
 
-    private User get(String entityId) {
-        for (User u : _foundUsers) {
+    private Bar get(String entityId) {
+        for (Bar u : _foundBars) {
             if (u.getId().equals(entityId)) {
-                Log.i(_TAG, "User found! id: " + entityId);
+                Log.i(_TAG, "Bar found! id: " + entityId);
                 return u;
             }
         }
-        Log.i(_TAG, "User was not found! id: " + entityId);
+        Log.i(_TAG, "Bar was not found! id: " + entityId);
         return null;
     }
 
     @Override
-    public void setLastId(String lastId) throws BussinessException {
-            throw new BussinessException("No se implementa el metodo setLastId() en UserSearcher"); // debería implementar una interfaz distinta UserSearcher...?
+    public int returnLastId() {
+        return this._lastId;
+    }
+
+    private int getLastId() {
+        // hice un custom for loop porq ni idea que puto metodo lo devuelve haciendo un loop con strings.
+        int maxId = 0;
+        int i = 1; // size, no index.
+        if (this._foundBars != null && this._foundBars.size() > 0) {
+            maxId = Integer.parseInt(this._foundBars.get(0).getId()); // arrancar por el primero!
+            while (i < this._foundBars.size()) {
+                if (maxId > Integer.parseInt(this._foundBars.get(i).getId())) {
+                    maxId = Integer.parseInt(this._foundBars.get(i).getId());
+                }
+                i++;
+            }
         }
+        return maxId;
+    }
 
-    @Override
-    public int returnLastId() throws BussinessException { throw new BussinessException("No se implementa el metodo returnLastId() en UserSearcher"); }
-
+    public void setLastId(String lastId) {
+        this._lastId = Integer.parseInt(lastId);
+    }
 
 }
+
