@@ -104,6 +104,7 @@ public class Login extends AppCompatActivity {
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            startActivity(new Intent(Login.this,MainActivity.class));
             Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
             Log.e("Login", "Error intentando loguear un usuario!", e);
         }
