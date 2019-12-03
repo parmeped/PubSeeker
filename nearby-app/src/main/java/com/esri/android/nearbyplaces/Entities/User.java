@@ -11,10 +11,10 @@ public class User implements IEntity {
     private String _userId;
     private ArrayList<Bar> _bars;
 
+    public User(){}
 
-    public User(){};
-
-    public User(String name, String email, ArrayList<Bar> bars) {
+    public User(String id, String name, String email, ArrayList<Bar> bars) {
+        this._userId = id;
         this._name = name;
         this._email = email;
         if (bars == null) {
@@ -66,4 +66,5 @@ public class User implements IEntity {
     public void removeBar(Bar bar) {
         //TODO
     }
+
 }

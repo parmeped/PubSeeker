@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().build();
 
-        EntityService usersService = ServicesConfiguration.getUsersService(); // initialize
+        ServicesConfiguration.initialize(); // initialize
 
         signin = findViewById(R.id.sign_in_button);
         signin.setOnClickListener(new View.OnClickListener() {

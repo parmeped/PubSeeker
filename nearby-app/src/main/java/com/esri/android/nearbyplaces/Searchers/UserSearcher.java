@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.esri.android.nearbyplaces.Common.IEntitySearcher;
+import com.esri.android.nearbyplaces.CustomExceptions.BussinessException;
 import com.esri.android.nearbyplaces.Entities.Bar;
 import com.esri.android.nearbyplaces.Entities.User;
+import com.google.android.gms.common.util.NumberUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.Callable;
 
+import io.opencensus.internal.StringUtil;
+
 
 public class UserSearcher implements IEntitySearcher {
 
@@ -26,7 +30,6 @@ public class UserSearcher implements IEntitySearcher {
     private String _collection;
     private String _TAG;
     private ArrayList<User> _foundUsers;
-    private int _lastId;
 
     public UserSearcher(FirebaseFirestore ref, String coll, String tag) {
         this._reference = ref;
@@ -50,7 +53,6 @@ public class UserSearcher implements IEntitySearcher {
                                     userFound.setId(document.getId());
                                     _foundUsers.add(userFound);
                                 }
-                                _lastId = getLastId();
                             }
                             else {
                                 Log.w(_TAG, "Error getting documents.", task.getException());
@@ -87,32 +89,12 @@ public class UserSearcher implements IEntitySearcher {
     }
 
     @Override
-    public int returnLastId() {
-        return this._lastId;
-    }
-
-    private int getLastId() {
-        // hice un custom for loop porq ni idea que puto metodo lo devuelve haciendo un loop con strings.
-        int maxId = 0;
-        int i = 1; // size, no index.
-        if (this._foundUsers != null && this._foundUsers.size() > 0) {
-            maxId = Integer.parseInt(this._foundUsers.get(0).getId()); // arrancar por el primero!
-            while (i < this._foundUsers.size()) {
-                if (maxId > Integer.parseInt(this._foundUsers.get(i).getId())) {
-                    maxId = Integer.parseInt(this._foundUsers.get(i).getId());
-                }
-                i++;
-            }
+    public void setLastId(String lastId) throws BussinessException {
+            throw new BussinessException("No se implementa el metodo setLastId() en UserSearcher"); // debería implementar una interfaz distinta UserSearcher...?
         }
-        return maxId;
-    }
 
-    public ArrayList<Bar> getFavoriteBars(String userId) {
-        User user = this.searchById(userId);
-        return user.getBars();
-    }
+    @Override
+    public int returnLastId() throws BussinessException { throw new BussinessException("No se implementa el metodo returnLastId() en UserSearcher"); }
 
-    public void setLastId(String lastId) {
-        this._lastId = Integer.parseInt(lastId);
-    }
+
 }

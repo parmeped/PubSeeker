@@ -13,8 +13,8 @@ public class BarMapper implements IEntityMapper {
     @Override
     public <T> T map(HashMap hashMap, T entityToMap) {
         Bar bar = (Bar) entityToMap;
-        hashMap.put("name", bar.getName());
-        hashMap.put("gps", bar.getGps());
+        //hashMap.put("name", bar.getName());
+        //hashMap.put("gps", bar.getGps());
         hashMap.put("barsId", bar.getId());
         return (T) bar;
     }
