@@ -21,7 +21,7 @@ public class EntityService implements IEntityService {
     private FirebaseFirestore _reference;
     private String _collection;
     private final String _TAG;
-    // private IEntityMapper _mapper; // aparentemente, no necesita un mapper!
+    private IEntityMapper _mapper;
     private IEntitySearcher _searcher;
 
     public EntityService

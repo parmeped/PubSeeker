@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.esri.android.nearbyplaces.Common.IEntitySearcher;
 import com.esri.android.nearbyplaces.Entities.Bar;
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -12,6 +13,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class BarsSearcher implements IEntitySearcher {
 
@@ -92,7 +96,7 @@ public class BarsSearcher implements IEntitySearcher {
         if (this._foundBars != null && this._foundBars.size() > 0) {
             maxId = Integer.parseInt(this._foundBars.get(0).getId()); // arrancar por el primero!
             while (i < this._foundBars.size()) {
-                if (maxId > Integer.parseInt(this._foundBars.get(i).getId())) {
+                if (maxId < Integer.parseInt(this._foundBars.get(i).getId())) {
                     maxId = Integer.parseInt(this._foundBars.get(i).getId());
                 }
                 i++;

@@ -59,22 +59,13 @@ public class User implements IEntity {
     public void addBar(Bar aBar) {
         if (this._bars != null) {
             this._bars.add(aBar);
+        } else {
+            this._bars = new ArrayList<>();
+            this._bars.add(aBar);
         }
     }
 
-    public ArrayList<Place> getBarsAsPlaces() {
-        ArrayList<Place> places = new ArrayList<>();
-        if (this._bars != null) {
-            for (Bar b: this._bars) {
-                SpatialReference spatialReference = SpatialReference.create(Integer.valueOf(b.get_a()));
-                Point location = new Point(Integer.valueOf(b.get_x()), Integer.valueOf(b.get_y()), 0, spatialReference );
-                Place place = new Place(b.get_name(), b.get_type(), location, b.get_address(), b.get_Url(), b.get_phone(), b.get_bearing(), b.get_distance());
-                places.add(place);
-            }
-            return places;
-        }
-        return null;
-    }
+    public ArrayList<Bar> getBars() { if (this._bars != null) { return this._bars; } return null; }
 
     public void removeBar(Bar bar) {
         //TODO

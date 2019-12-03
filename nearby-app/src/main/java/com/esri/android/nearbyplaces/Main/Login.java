@@ -55,13 +55,6 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
-
-
     }
 
     private void signIn() {
@@ -85,23 +78,23 @@ public class Login extends AppCompatActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            //GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
             Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_SHORT).show();
             IEntityService userService = ServicesConfiguration.getUsersService();
-            User user = userService.searchById(account.getId());
+            User user = userService.searchById("105677939755507807152");
 
             // si el user ya se había logueado en algun momento, debería existir ya. Sino, generar uno nuevo y guardarlo
             if (user == null) {
-                ServicesConfiguration.setCurrentUser(new User(account.getId(), account.getDisplayName(), account.getEmail(), null));
+               // ServicesConfiguration.setCurrentUser(new User(account.getId(), account.getDisplayName(), account.getEmail(), null));
                 ServicesConfiguration.getUsersService().save(ServicesConfiguration.getCurrentUser());
             } else {
                 ServicesConfiguration.setCurrentUser(user);
             }
 
             startActivity(new Intent(Login.this,MainActivity.class));
-        } catch (ApiException e) {
+        } catch (Exception e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             startActivity(new Intent(Login.this,MainActivity.class));

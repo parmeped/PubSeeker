@@ -1,7 +1,6 @@
 package com.esri.android.nearbyplaces.Common;
 
 import com.esri.android.nearbyplaces.CustomExceptions.BussinessException;
-
 import java.util.HashMap;
 
 public interface IEntityMapper {
