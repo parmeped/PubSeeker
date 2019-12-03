@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.esri.android.nearbyplaces.R;
+import com.esri.android.nearbyplaces.Services.EntityService;
+import com.esri.android.nearbyplaces.Services.ServicesConfiguration;
 import com.esri.android.nearbyplaces.map.MapActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -33,6 +35,9 @@ public class Login extends AppCompatActivity {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().build();
 
+        ServicesConfiguration.initialize(); // initialize
+
+        signin = findViewById(R.id.sign_in_button);
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 

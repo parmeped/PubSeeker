@@ -53,8 +53,12 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
+import com.esri.android.nearbyplaces.Entities.Bar;
+import com.esri.android.nearbyplaces.Entities.User;
 import com.esri.android.nearbyplaces.PlaceListener;
 import com.esri.android.nearbyplaces.R;
+import com.esri.android.nearbyplaces.Services.EntityService;
+import com.esri.android.nearbyplaces.Services.ServicesConfiguration;
 import com.esri.android.nearbyplaces.data.CategoryHelper;
 import com.esri.android.nearbyplaces.data.LocationService;
 import com.esri.android.nearbyplaces.data.Place;
@@ -86,6 +90,7 @@ import com.esri.arcgisruntime.symbology.Symbol;
 import com.esri.arcgisruntime.tasks.networkanalysis.DirectionManeuver;
 import com.esri.arcgisruntime.tasks.networkanalysis.Route;
 import com.esri.arcgisruntime.tasks.networkanalysis.RouteResult;
+import com.google.firebase.firestore.GeoPoint;
 
 public class MapFragment extends Fragment implements  MapContract.View, PlaceListener {
 
@@ -704,6 +709,26 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
    * @param place - Place item selected by user
    */
   @Override public final void showDetail(final Place place) {
+
+    EntityService usersService = ServicesConfiguration.getUsersService();
+    EntityService barsService = ServicesConfiguration.getBarsService();
+
+    Log.i("Map fragment", "Attempting to save the place");
+    try {
+      User user = new User("1", "Testing", "Testing this", null);
+      Bar bar = new Bar();
+
+      bar.setData(place);
+
+      barsService.save(bar);
+      user.addBar(bar);
+      usersService.save(user);
+    }
+    catch (Exception e) {
+      Log.e("Map fragment", "There was a problem saving the entities", e);
+    }
+
+
     final TextView txtName = mBottomSheet.findViewById(R.id.placeName);
     txtName.setText(place.getName());
     String address = place.getAddress();

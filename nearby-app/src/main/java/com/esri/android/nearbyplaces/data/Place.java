@@ -37,7 +37,7 @@ public final class Place implements Comparable<Place> {
   @Nullable
   private final String mType;
   @Nullable
-  private final Point mLocation;
+  private Point mLocation;
   @Nullable
   private final String mAddress;
   @Nullable
@@ -120,4 +120,9 @@ public final class Place implements Comparable<Place> {
     }
     return  result;
   }
+
+  public void setLocationForFirestoreSave() {
+    this.mLocation = null;
+  }
+
 }

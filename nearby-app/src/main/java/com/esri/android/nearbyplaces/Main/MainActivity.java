@@ -5,15 +5,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.esri.android.nearbyplaces.Entities.Bar;
-import com.esri.android.nearbyplaces.Entities.User;
 import com.esri.android.nearbyplaces.R;
 import com.esri.android.nearbyplaces.Services.EntityService;
 import com.esri.android.nearbyplaces.Services.ServicesConfiguration;
@@ -24,8 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
-import java.util.ArrayList;
-import java.util.Map;
+import com.esri.android.nearbyplaces.places.PlacesActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
-
-        //EntityService usersService = ServicesConfiguration.getUsersService();
-        //EntityService barsService = ServicesConfiguration.getBarsService();
-
     }
 
     public void onClick(View v){

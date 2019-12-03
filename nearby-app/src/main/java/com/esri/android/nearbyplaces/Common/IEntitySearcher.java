@@ -1,10 +1,11 @@
 package com.esri.android.nearbyplaces.Common;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
+import com.esri.android.nearbyplaces.CustomExceptions.BussinessException;
 
 public interface IEntitySearcher {
+    int returnLastId() throws BussinessException;
     <T> T searchById(String entityId);
-    <T> ArrayList<T> getCollection();
+    void prepareData();
+    void setLastId(String lastId) throws BussinessException;
 }
+
