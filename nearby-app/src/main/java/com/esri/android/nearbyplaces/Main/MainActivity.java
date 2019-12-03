@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,9 @@ import com.esri.android.nearbyplaces.Services.ServicesConfiguration;
 import com.esri.android.nearbyplaces.map.MapActivity;
 import com.esri.android.nearbyplaces.places.PlacesActivity;
 import com.esri.android.nearbyplaces.places.PlacesContract;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mDotLayout;
     private TextView[] mDots;
     private int j;
+    private ImageView i;
+    GoogleSignInClient mGoogleSignClient;
 
 
     private SliderAdapter sliderAdapter;
@@ -38,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignClient = GoogleSignIn.getClient(this,gso);
+
+        i = findViewById(R.id.exit);
+
+
 
         mSlideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
@@ -50,32 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
 
-        EntityService usersService = ServicesConfiguration.getUsersService();
-        EntityService barsService = ServicesConfiguration.getBarsService();
+        //EntityService usersService = ServicesConfiguration.getUsersService();
+        //EntityService barsService = ServicesConfiguration.getBarsService();
 
-        User user = new User("1", "testing", "super@mail.com",null);
-        Bar bar = new Bar("super bar", "1354112312.45", "1");
-
-
-        try {
-            //usersService.save(user);
-            barsService.save(bar);
-        }
-        catch (Exception ex) {
-            Log.e("Main Activity", "Problema save() con entidad",  ex); // el EntityService tira exception si no tiene un mapper.
-        }
-        ArrayList<Integer> list = usersService.getCollection();
-
-
-        Log.i("Main Activity", "searching by id 1");
-
-        try {
-            User entity = usersService.searchById("LPmCkGzYosg25CPEJIOB");
-            Log.i("Main Activity", "Found entity! showing mail: " + entity.getEmail());
-        }
-        catch (Exception e) {
-            Log.e("Main Activity", "Error searching for entity!", e);
-        }
     }
 
     public void onClick(View v){
@@ -97,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+
 
 
 
