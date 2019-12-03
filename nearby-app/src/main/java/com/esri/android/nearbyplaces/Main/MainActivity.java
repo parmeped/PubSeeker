@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         switch(j){
 
             case 0:
-                pub = new Intent(MainActivity.this, MapActivity.class);
+                pub = new Intent(MainActivity.this, PlacesActivity.class);
                 startActivity(pub);
                 break;
             case 1:

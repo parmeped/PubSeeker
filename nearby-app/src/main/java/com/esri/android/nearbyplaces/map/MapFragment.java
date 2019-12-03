@@ -90,6 +90,10 @@ import com.esri.arcgisruntime.symbology.Symbol;
 import com.esri.arcgisruntime.tasks.networkanalysis.DirectionManeuver;
 import com.esri.arcgisruntime.tasks.networkanalysis.Route;
 import com.esri.arcgisruntime.tasks.networkanalysis.RouteResult;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.firestore.GeoPoint;
 
 public class MapFragment extends Fragment implements  MapContract.View, PlaceListener {
@@ -146,6 +150,18 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
 
   private Point mEnd = null;
 
+  private TextView add;
+
+  private GoogleSignInOptions gso;
+
+  private GoogleSignInClient mGoogleSignInClient;
+
+  private GoogleSignInAccount account;
+
+
+
+
+
   public MapFragment(){}
 
   public static MapFragment newInstance(){
@@ -156,6 +172,7 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
   public final void onCreate( final Bundle savedInstance){
 
     super.onCreate(savedInstance);
+
     // retain this fragment
     setRetainInstance(true);
 
@@ -170,6 +187,16 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
 
     //Set up behavior for the bottom sheet
     setUpBottomSheet();
+
+    gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build();
+
+    mGoogleSignInClient = GoogleSignIn.getClient(getContext(),gso);
+
+    account = GoogleSignIn.getLastSignedInAccount(getContext());
+
+
   }
 
   @Override
@@ -710,23 +737,36 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
    */
   @Override public final void showDetail(final Place place) {
 
+    add = mBottomSheet.findViewById(R.id.addFavorite);
+
     EntityService usersService = ServicesConfiguration.getUsersService();
     EntityService barsService = ServicesConfiguration.getBarsService();
 
-    Log.i("Map fragment", "Attempting to save the place");
-    try {
-      User user = new User("1", "Testing", "Testing this", null);
-      Bar bar = new Bar();
+    add.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
 
-      bar.setData(place);
 
-      barsService.save(bar);
-      user.addBar(bar);
-      usersService.save(user);
-    }
-    catch (Exception e) {
-      Log.e("Map fragment", "There was a problem saving the entities", e);
-    }
+        try {
+          User user = new User(account.getId(), account.getDisplayName(), account.getEmail(), null);
+          Bar bar = new Bar();
+
+          bar.setData(place);
+
+          barsService.save(bar);
+          user.addBar(bar);
+          usersService.save(user);
+          Toast.makeText(getContext(), "Place added successfully", Toast.LENGTH_SHORT).show();
+
+        }
+        catch (Exception e) {
+          Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+      }
+    });
+
+
 
 
     final TextView txtName = mBottomSheet.findViewById(R.id.placeName);
