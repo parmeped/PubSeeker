@@ -154,12 +154,6 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
 
   private GoogleSignInOptions gso;
 
-  private GoogleSignInClient mGoogleSignInClient;
-
-  private GoogleSignInAccount account;
-
-
-
 
 
   public MapFragment(){}
@@ -191,10 +185,6 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
     gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build();
-
-    mGoogleSignInClient = GoogleSignIn.getClient(getContext(),gso);
-
-    account = GoogleSignIn.getLastSignedInAccount(getContext());
 
 
   }
@@ -748,10 +738,11 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
 
 
         try {
-          User user = new User(account.getId(), account.getDisplayName(), account.getEmail(), null);
+
+          User user = ServicesConfiguration.getCurrentUser();
           Bar bar = new Bar();
 
-          bar.setData(place);
+          bar.setPlaceData(place);
 
           barsService.save(bar);
           user.addBar(bar);
@@ -761,6 +752,7 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
         }
         catch (Exception e) {
           Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+          Log.e("Map Fragment", "Error adding a place to a user!", e);
         }
 
       }

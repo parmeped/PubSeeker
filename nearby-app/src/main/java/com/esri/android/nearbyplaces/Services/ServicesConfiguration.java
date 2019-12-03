@@ -52,4 +52,6 @@ public class ServicesConfiguration extends Application {
 
     public static void setCurrentUser(User user) { _currentUser = user; }
 
+    public static User getCurrentUser() { return _currentUser; }
+
 }

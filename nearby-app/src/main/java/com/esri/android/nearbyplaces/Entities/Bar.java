@@ -132,7 +132,7 @@ public class Bar implements IEntity {
         this._a = _a;
     }
 
-    public void setData(Place place) {
+    public void setPlaceData(Place place) {
         this._name = place.getName();
         this._type = place.getType();
         this._address = place.getAddress();
