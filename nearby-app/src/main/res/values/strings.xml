@@ -46,5 +46,6 @@
     <string name="AR">Adrian Rubado</string>
     <string name="todo">TODO</string>
     <string name="slide_button">slide_button</string>
+    <string name="title_activity_favorites">FavoritesActivity</string>
 
 </resources>

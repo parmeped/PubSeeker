@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.esri.android.nearbyplaces.R;
 import com.esri.android.nearbyplaces.Services.EntityService;
 import com.esri.android.nearbyplaces.Services.ServicesConfiguration;
+import com.esri.android.nearbyplaces.data.Place;
 import com.esri.android.nearbyplaces.map.MapActivity;
 import com.esri.android.nearbyplaces.places.PlacesActivity;
 import com.esri.android.nearbyplaces.places.PlacesContract;
@@ -22,6 +23,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import com.esri.android.nearbyplaces.places.PlacesActivity;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,12 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignClient = GoogleSignIn.getClient(this,gso);
-
-
-
-
-
-
 
 
 

@@ -87,7 +87,7 @@ public class Login extends AppCompatActivity {
 
             // si el user ya se había logueado en algun momento, debería existir ya. Sino, generar uno nuevo y guardarlo
             if (user == null) {
-               // ServicesConfiguration.setCurrentUser(new User(account.getId(), account.getDisplayName(), account.getEmail(), null));
+            //    ServicesConfiguration.setCurrentUser(new User(account.getId(), account.getDisplayName(), account.getEmail(), null));
                 ServicesConfiguration.getUsersService().save(ServicesConfiguration.getCurrentUser());
             } else {
                 ServicesConfiguration.setCurrentUser(user);

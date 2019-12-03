@@ -23,6 +23,7 @@
  */
 package com.esri.android.nearbyplaces.map;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -729,15 +730,14 @@ public class MapFragment extends Fragment implements  MapContract.View, PlaceLis
 
     add = mBottomSheet.findViewById(R.id.addFavorite);
 
-    EntityService usersService = ServicesConfiguration.getUsersService();
-    EntityService barsService = ServicesConfiguration.getBarsService();
 
     add.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
 
-
         try {
+          EntityService usersService = ServicesConfiguration.getUsersService();
+          EntityService barsService = ServicesConfiguration.getBarsService();
 
           User user = ServicesConfiguration.getCurrentUser();
           Bar bar = new Bar();
