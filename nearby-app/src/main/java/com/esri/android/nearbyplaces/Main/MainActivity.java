@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mDotLayout;
     private TextView[] mDots;
     private int j;
-    ImageView i;
+
 
     GoogleSignInClient mGoogleSignClient;
 
@@ -80,11 +80,12 @@ public class MainActivity extends AppCompatActivity {
         switch(j){
 
             case 0:
-                pub = new Intent(MainActivity.this, PlacesActivity.class);
+                pub = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(pub);
                 break;
             case 1:
-                Toast.makeText(this, "Aca vendria la activity de favoritos", Toast.LENGTH_SHORT).show();
+                pub = new Intent(MainActivity.this, PlacesActivity.class);
+                startActivity(pub);
                 break;
             case 2:
                 pub = new Intent(MainActivity.this, About.class);
